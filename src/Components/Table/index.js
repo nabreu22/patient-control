@@ -18,12 +18,11 @@ const Table = (props) => {
         <TableBody>
           {props.patientsList.map((patient) => (
             <TableRow
-              Key={patient.id}
+              key={patient.id}
               name={patient.name}
               weight={patient.weight}
               height={patient.height}
               fatCorporal={patient.fatCorporal + "%"}
-              bmi={patient.bmi}
             />
           ))}
         </TableBody>

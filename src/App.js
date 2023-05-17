@@ -8,33 +8,24 @@ import Form from "./Components/Form";
 import { useState } from "react";
 
 function App() {
-  const [patients, setPatients] = useState([
-    {
-      id: 25,
-      name: "Henrique",
-      weight: 70,
-      height: 1.84,
-      fatCorporal: 5,
-      bmi: 22.5,
-    },
-    {
-      id: 1,
-      name: "Henrica",
-      weight: 70,
-      height: 1.84,
-      fatCorporal: 5,
-      bmi: 22.5,
-    },
-  ]);
-  console.log(patients);
+  const [patients, setPatients] = useState([]);
+
+  const toNewPatientAdd = (patient) => {
+    console.log("### added new guy ", patient);
+    setPatients([...patients, patient]);
+  };
+
   return (
     <div className="App">
       <Banner />
       <Header>Patient Control</Header>
       <Table patientsList={patients} />
       <Header>Add new patient</Header>
-
-      <Form />
+      <Form
+        /*setPatientsList={setPatients}*/
+        // patients={(patient) => patient.name}
+        toNewPatientAdd={toNewPatientAdd}
+      />
     </div>
   );
 }
