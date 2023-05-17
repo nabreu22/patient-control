@@ -9,22 +9,13 @@ const Form = (props) => {
   const [height, setHeight] = useState("");
   const [fatCorporal, setFatCorporal] = useState("");
 
-  // function handleName(event) {
-  //   // setId();
-  //   setName(event.target.value);
-  //   setWeight(event.target.value);
-  //   setHeight(event.target.value);
-  //   setFatCorporal(event.target.value);
-  //   setBmi(event.target.value);
-  // }
-
   function addNewPatient(event) {
     event.preventDefault();
     console.log("enviei formulario", name);
 
-    props.toNewPatientAdd({
+    props.toNewPatientAdded({
       id: uuidv4(),
-      name: name,
+      name,
       weight,
       height,
       fatCorporal,

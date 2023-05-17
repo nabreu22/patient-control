@@ -27,7 +27,7 @@ const Table = (props) => {
           ))}
         </TableBody>
       </table>
-
+      {/* 
       <div>
         <label htmlFor="filter-table">Filter:</label>
         <input
@@ -37,7 +37,7 @@ const Table = (props) => {
           placeholder="type o name do patient"
         />
         <Button name={"Find Patient"} />
-      </div>
+      </div> */}
     </section>
   );
 };
