@@ -9,16 +9,104 @@ const Form = (props) => {
   const [height, setHeight] = useState("");
   const [fatCorporal, setFatCorporal] = useState("");
 
+  const [nameError, setNameError] = useState(false);
+  const [weightError, setWeightError] = useState(false);
+  const [heightError, setHeightError] = useState(false);
+  const [fatCorporalError, setFatCorporalError] = useState(false);
+
   function addNewPatient(event) {
     event.preventDefault();
-    console.log("enviei formulario", name);
 
+    const weightNumber = parseInt(weight);
+    const heightNumber = parseInt(height);
+    const fatCorporalNumber = parseInt(fatCorporal);
+
+    if (name === "") {
+      alert("You must fill name");
+      setNameError(true);
+      return;
+    }
+    if (!name.includes(" ")) {
+      alert("The name must have at lest two words");
+      setNameError(true);
+      return;
+    }
+    const words = name.split(" "); //o espaco eh o elemento escolhido para separar os elementos do array
+    console.log(words);
+    if (words[0].length < 2 || words[1].length < 2) {
+      alert("Each name must have at least two characters");
+      setNameError(true);
+      console.log(nameError);
+      return;
+    }
+    setNameError(false);
+    // ----------------------------------------------------------------
+
+    if (weight === "") {
+      alert("You must fill weight");
+      setWeightError(true);
+      return;
+    }
+
+    if (isNaN(parseInt(weight))) {
+      alert("Weight, must be a number");
+      setWeightError(true);
+      return;
+    }
+
+    if (weightNumber < 5 || weightNumber > 500) {
+      alert("Weight must be greater than 5kg and less than 500kg");
+      setWeightError(true);
+      return;
+    }
+    setWeightError(false);
+    // ----------------------------------------------------------------
+
+    if (height === "") {
+      alert("You must fill height");
+      setHeightError(true);
+      return;
+    }
+
+    if (isNaN(parseInt(height))) {
+      alert("Height, must be a number");
+      setHeightError(true);
+      return;
+    }
+
+    if (heightNumber < 30 || heightNumber > 250) {
+      alert("Height must be greater than 30cm and less than 250cm");
+      setHeightError(true);
+      return;
+    }
+    setHeightError(false);
+    // ----------------------------------------------------------------
+
+    if (fatCorporal === "") {
+      alert("You must fill fat corporal");
+      setFatCorporalError(true);
+      return;
+    }
+
+    if (isNaN(parseInt(fatCorporal))) {
+      alert("Fat corporal, must be a number");
+      setFatCorporalError(true);
+      return;
+    }
+
+    if (fatCorporalNumber < 0 || fatCorporalNumber > 100) {
+      alert("Fat corporal must be greater than 0% and less than 100%");
+      setFatCorporalError(true);
+      return;
+    }
+    setFatCorporalError(false);
+    // ----------------------------------------------------------------
     props.toNewPatientAdded({
       id: uuidv4(),
       name,
-      weight,
-      height,
-      fatCorporal,
+      weight: weightNumber,
+      height: heightNumber,
+      fatCorporal: fatCorporalNumber,
     });
 
     setName("");
@@ -37,7 +125,7 @@ const Form = (props) => {
             value={name}
             // type={}
             placeholder={"Type the patient's name"}
-            // className={}
+            className={nameError ? "error" : ""}
           />
 
           <label htmlFor="weight">weight:</label>
@@ -46,6 +134,7 @@ const Form = (props) => {
             value={weight}
             // type={}
             placeholder={"Type the patient's weight"}
+            className={weightError ? "error" : ""} //eh verdadeiro? sim, nao
             // className={}
           />
 
@@ -55,6 +144,7 @@ const Form = (props) => {
             value={height}
             // type={}
             placeholder={"Type the patient's height"}
+            className={heightError ? "error" : ""}
             // className={}
           />
 
@@ -64,6 +154,7 @@ const Form = (props) => {
             value={fatCorporal}
             // type={}
             placeholder={"Type the patient's fat corporal"}
+            className={fatCorporalError ? "error" : ""}
             // className={}
           />
         </div>

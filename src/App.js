@@ -11,15 +11,20 @@ function App() {
   const [patients, setPatients] = useState([]);
 
   const toNewPatientAdded = (patient) => {
-    console.log("### added new guy ", patient);
     setPatients([...patients, patient]);
+  };
+
+  const removePatients = (id) => {
+    console.log("removePatients", id);
+    const updatedPatients = patients.filter((patient) => patient.id !== id);
+    setPatients(updatedPatients);
   };
 
   return (
     <div className="App">
       <Banner />
       <Header>Patient Control</Header>
-      <Table patientsList={patients} />
+      <Table patientsList={patients} removePatients={removePatients} />
       <Header>Add new patient</Header>
       <Form toNewPatientAdded={toNewPatientAdded} />
     </div>

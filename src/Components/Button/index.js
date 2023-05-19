@@ -3,7 +3,7 @@ import "./Button.css";
 const Button = (props) => {
   return (
     <div>
-      <button>{props.children}</button>
+      <button {...props}>{props.children}</button>
     </div>
   );
 };
